@@ -1,22 +1,25 @@
-<?php
+<?php 
+/**
+*PARAMETERS FETCH FOR FORM
+**/
 
 $myRequestArray=$_SESSION[$user_request];
-
-
+//alert($myRequestArray[0]." ".$myRequestArray[1]);
+$locality=$_POST['uid_val'];
 ?>
 
 
     <div class="container-fluid">
             <div class="block-header">
-                <h2>LOCATION MANAGER (LM) / GET LOCATION</h2>
-            </div>
+                <h2>LOCATION MANAGER (LM) / Book Guide (G)</h2>
+            </div>    
             <!-- Vertical Layout -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
                             <h2>
-                                Find Points of Interest
+                                Book Guide
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -31,29 +34,28 @@ $myRequestArray=$_SESSION[$user_request];
                             </ul>
                         </div>
                         <div class="body">
-                            <form  method="POST" name="frm_ser" action="./?act=location/modify">
-
-                                <label for="user_loc">Select Locality</label>
+                            <form  method="POST" name="frm_ser" action="">
+                                
+                                <label for="user_loc">Available Guides</label>
                                 <div class="form-group">
                                     <div class="form-line">
                                         <select id="user_loc" name="user_loc" class="form-control show-tick" data-live-search="true" required>
-                                        <option value="">Please Select Locality</option>
+                                        <option value="">Please Select Your Local Guide</option>
                                         <?php
-                                            $query=mysqli_query($mysqli,"SELECT name FROM locality") or die(mysqli_error($mysqli));
+                                            $query=mysqli_query($mysqli,"SELECT user_name FROM guides WHERE locality='$locality'") or die(mysqli_error($mysqli));
                                             while($row=mysqli_fetch_array($query))
                                             {
-                                                echo $user_dept==$row['name'] ? '<option value="'.$row['name'].'" selected>'.$row['name'].'</option>' : '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+                                                echo $book_guide==$row['user_name'] ? '<option value="'.$row['user_name'].'" selected>'.$row['user_name'].'</option>' : '<option value="'.$row['user_name'].'">'.$row['user_name'].'</option>';
                                             }
                                         ?>
-
+                                        
                                     </select>
                                     </div>
                                 </div>
                                <input type="hidden"  name="lat1" id="lat1">
                                  <input type="hidden"  name="lat2" id="lat2">
-                                <button type="submit" name="submit" value="By Locality" class="btn btn-block btn-lg btn-primary m-t-20 waves-effect" value="By Locality">Get POIs By Locality </button>
-                                 <button type="submit" name="submit" value="add_user" class="btn btn-block btn-lg btn-primary m-t-20 waves-effect">Get POIs Near Me</button>
-
+                                <button type="submit" name="submit" value="book_guide" class="btn btn-block btn-lg btn-primary m-t-20 waves-effect" value="By Locality">Book My Guide</button>
+                                 
                             </form>
                         </div>
                     </div>
@@ -61,18 +63,26 @@ $myRequestArray=$_SESSION[$user_request];
             </div>
             <!-- #END# Vertical Layout -->
     </div>
-
+    
  <script>
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
       var map, infoWindow;
       function initMap() {
+        
+       // infoWindow = new google.maps.InfoWindow;
 
+        // Try HTML5 geolocation.
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-
+          
+            //alert(position.coords.latitude);
             document.getElementById("lat1").value=position.coords.latitude;
             document.getElementById("lat2").value=position.coords.longitude;
             infoWindow.setPosition(pos);
@@ -83,6 +93,7 @@ $myRequestArray=$_SESSION[$user_request];
             handleLocationError(true, infoWindow, map.getCenter());
           });
         } else {
+          // Browser doesn't support Geolocation
           handleLocationError(false, infoWindow, map.getCenter());
         }
       }
@@ -95,7 +106,32 @@ $myRequestArray=$_SESSION[$user_request];
         infoWindow.open(map);
       }
 
+  //    alert("Hi");
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbZeKLxUIX3Bsp3jQsQjH-qfD3rLM_nvE&callback=initMap">
     </script>
+
+<?php
+alert($uid);
+   /**
+*INSERT POST CODE
+**/
+if(isset($_POST['book_guide']))
+{
+    $guide_d=$_POST['user_loc'];
+    
+
+    /**
+    *INSERT CODE ADDED BY RIZWAN ON 24/06/2017
+    **/
+    $stmt = $mysqli->prepare("INSERT INTO courses(ccode,cname,ctype,mmarks,credits,dept,semester,cclass,status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param('sssssssss', $p_ccode, $p_cname, $p_ctype, $p_mmarks, $p_credits, $p_dept, $p_semester, $p_cclass, $p_status);
+    if($stmt->execute())
+        alert_sweet_success("Course Added Successfully!!!");
+    else
+        alert_sweet_failed("Unable to Add Course!!! Try Again!!!");
+    $stmt->close();
+    $_REQUEST = $_POST = $_GET = NULL;
+}
+?>

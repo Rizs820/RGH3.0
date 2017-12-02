@@ -40,15 +40,10 @@
                      <li <?php echo in_array("location", $path) ? 'class="active"' : ""; ?>>
                         <a href="./?act=location/add">
                             <i class="material-icons">home</i>
-                            <span>Find POIs by Locality</span>
+                            <span>Find POIs</span>
                         </a>
                     </li>
-                    <li <?php echo in_array("location", $path) ? 'class="active"' : ""; ?>>
-                        <a href="./?act=locationm/add">
-                            <i class="material-icons">home</i>
-                            <span>Find POIs near Me</span>
-                        </a>
-                    </li>
+                   
                     
                     
                 </ul>

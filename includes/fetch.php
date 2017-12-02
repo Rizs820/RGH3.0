@@ -4,22 +4,19 @@ session_regenerate_id(true);
 date_default_timezone_set('Asia/Kolkata');
 
 
-/********************************************************************************************
-					LOGIN USER DETAILS FETCH
-********************************************************************************************/
- if (isset($_SESSION['user_id'], $_SESSION['email'],$_SESSION['login_string'])) 
+
+ if (isset($_SESSION['user_id'], $_SESSION['email'],$_SESSION['login_string']))
  {
  	$email = $_SESSION['email'];
  	$user_id = $_SESSION['user_id'];
- 	if ($stmt = $mysqli->prepare("SELECT uid,user_name,user_mobile,user_dept,last_ip,last_login,user_group 
+ 	if ($stmt = $mysqli->prepare("SELECT uid,user_name,user_mobile,user_dept,last_ip,last_login,user_group
         FROM members
        WHERE email = ?
         LIMIT 1")) {
-        $stmt->bind_param('s', $email);  // Bind "$email" to parameter.
-        $stmt->execute();    // Execute the prepared query.
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
         $stmt->store_result();
- 
-        // get variables from result.
+
         $stmt->bind_result($uid,$user_name,$user_mobile,$user_dept,$last_ip,$last_login,$user_group);
         $stmt->fetch();
  		//alert($pname);
@@ -28,18 +25,11 @@ date_default_timezone_set('Asia/Kolkata');
 
         }
 
- 	}      
+ 	}
 }
-/********************************************************************************************
-					END OF LOGIN USER DETAILS FETCH
-********************************************************************************************/
-
-/********************************************************************************************
-					FORM POST FOR USER PROFILE UPDATE
-********************************************************************************************/
-if (isset($_POST['update_profile'])) 
+if (isset($_POST['update_profile']))
 {
-	if (isset($_POST['pname'], $_POST['pmob'], $_POST['email'])) 
+	if (isset($_POST['pname'], $_POST['pmob'], $_POST['email']))
 	{
 		$p_pname=$_POST['pname'];
 		$p_pmob=$_POST['pmob'];
@@ -65,13 +55,11 @@ if (isset($_POST['update_profile']))
         $upass='$2y$10$W4AOacFPGyFzZIHfGOyDDuSqZsv2d2iAdbP2.Bqhw/txynx2Og8pe';
 		$query="INSERT INTO members (email, status, role, byuser, pname, pmob, paccod, pcollege, password) VALUES ('$p_email', '$status', '$role', '$byuser', '$p_pname', '$p_pmob', '$p_paccod', '$p_pcollege', '$upass')";
 		/*$query="INSERT INTO members SET pname='$p_pname', pmob='$p_pmob', paccod='$p_paccod',pcollege='$p_pcollege' WHERE uid='$uid' AND email='$email'" */
-		$result=mysqli_query($mysqli,$query) or die(mysqli_error()); 
+		$result=mysqli_query($mysqli,$query) or die(mysqli_error());
 		//alert($result);
-		
+
 		if($result)
 		{
-			/*$res1=mysqli_query($mysqli,"SELECT * FROM members WHERE email='$p_email' AND pmob='$p_pmob' AND pcollege='$p_pcollege' AND pname='$p_pname'") or die(mysqli_error());
-			$row1=mysqli_fetch_array($res1);*/
 			alert_wr("User Added Successfully!!!","./?act=user");
 			//mysqli_free_result($mysqli,$result);
 		}
@@ -79,22 +67,11 @@ if (isset($_POST['update_profile']))
 		{
 			alert_wr("Unable to Add User, Please Contact Support!!!","./?act=user");
 			//mysqli_free_result($mysqli,$result);
-		}	
+		}
 	}
 	else
 	{
 		alert_wr("Wrong Post Variable, Please Contact Support!!!","./?act=user");
 	}
-	//alert($p_email);
-	//$mysqli->query("INSERT INTO login_attempts(user_id, time) VALUES ('$user_id', '$now')");
-	
+
 }
-
-        
-
-/********************************************************************************************
-					END OF FORM POST FOR USER PROFILE UPDATE
-********************************************************************************************/
-
-
-
