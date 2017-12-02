@@ -2,12 +2,12 @@
  * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
  * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
  *
- * Version: 1.3.0
+ * Version: 1.3.6
  *
  */
 (function ($) {
 
-    jQuery.fn.extend({
+    $.fn.extend({
         slimScroll: function (options) {
 
             var defaults = {
@@ -73,10 +73,10 @@
                 touchScrollStep: 200,
 
                 // sets border radius
-                borderRadius: '7px',
+                borderRadius: '0',
 
                 // sets border radius of the rail
-                railBorderRadius: '7px'
+                railBorderRadius: '0'
             };
 
             var o = $.extend(defaults, options);
@@ -99,8 +99,8 @@
                     var offset = me.scrollTop();
 
                     // find bar and rail
-                    bar = me.parent().find('.' + o.barClass);
-                    rail = me.parent().find('.' + o.railClass);
+                    bar = me.closest('.' + o.barClass);
+                    rail = me.closest('.' + o.railClass);
 
                     getBarHeight();
 
@@ -136,6 +136,11 @@
                     }
 
                     return;
+                }
+                else if ($.isPlainObject(options)) {
+                    if ('destroy' in options) {
+                        return;
+                    }
                 }
 
                 // optionally set height to the parent's height
@@ -292,7 +297,7 @@
                 }
 
                 // attach scroll events
-                attachWheel();
+                attachWheel(this);
 
                 function _onWheel(e) {
                     // use mouse wheel only when mouse is over
@@ -305,11 +310,8 @@
                     if (e.detail) { delta = e.detail / 3; }
 
                     var target = e.target || e.srcTarget || e.srcElement;
-                    /* console.log($(target).closest('.' + o.wrapperClass).attr("class"));
-                     console.log(me.parent().attr("class"));*/
                     if ($(target).closest('.' + o.wrapperClass).is(me.parent())) {
                         // scroll content
-
                         scrollContent(delta, true);
                     }
 
@@ -319,7 +321,6 @@
                 }
 
                 function scrollContent(y, isWheel, isJump) {
-
                     releaseScroll = false;
                     var delta = y;
                     var maxTop = me.outerHeight() - bar.outerHeight();
@@ -365,11 +366,10 @@
                     hideBar();
                 }
 
-                function attachWheel() {
+                function attachWheel(target) {
                     if (window.addEventListener) {
-                        this.addEventListener('DOMMouseScroll', _onWheel, false);
-                        this.addEventListener('mousewheel', _onWheel, false);
-                        //this.addEventListener('MozMousePixelScroll', _onWheel, false );
+                        target.addEventListener('DOMMouseScroll', _onWheel, false);
+                        target.addEventListener('mousewheel', _onWheel, false);
                     }
                     else {
                         document.attachEvent("onmousewheel", _onWheel)
@@ -436,8 +436,8 @@
         }
     });
 
-    jQuery.fn.extend({
-        slimscroll: jQuery.fn.slimScroll
+    $.fn.extend({
+        slimscroll: $.fn.slimScroll
     });
 
 })(jQuery);
