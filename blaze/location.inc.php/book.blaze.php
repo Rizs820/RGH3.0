@@ -1,10 +1,7 @@
-<?php 
-/**
-*PARAMETERS FETCH FOR FORM
-**/
+<?php
 
 $myRequestArray=$_SESSION[$user_request];
-//alert($myRequestArray[0]." ".$myRequestArray[1]);
+
 $locality=$_POST['uid_val'];
 ?>
 
@@ -12,7 +9,7 @@ $locality=$_POST['uid_val'];
     <div class="container-fluid">
             <div class="block-header">
                 <h2>LOCATION MANAGER (LM) / Book Guide (G)</h2>
-            </div>    
+            </div>
             <!-- Vertical Layout -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -35,7 +32,7 @@ $locality=$_POST['uid_val'];
                         </div>
                         <div class="body">
                             <form  method="POST" name="frm_ser" action="">
-                                
+
                                 <label for="user_loc">Available Guides</label>
                                 <div class="form-group">
                                     <div class="form-line">
@@ -48,14 +45,14 @@ $locality=$_POST['uid_val'];
                                                 echo $book_guide==$row['user_name'] ? '<option value="'.$row['user_name'].'" selected>'.$row['user_name'].'</option>' : '<option value="'.$row['user_name'].'">'.$row['user_name'].'</option>';
                                             }
                                         ?>
-                                        
+
                                     </select>
                                     </div>
                                 </div>
                                <input type="hidden"  name="lat1" id="lat1">
                                  <input type="hidden"  name="lat2" id="lat2">
-                                <button type="submit" name="submit" value="book_guide" class="btn btn-block btn-lg btn-primary m-t-20 waves-effect" value="By Locality">Book My Guide</button>
-                                 
+                                <button type="submit" name="book_guide" value="book_guide" class="btn btn-block btn-lg btn-primary m-t-20 waves-effect" value="By Locality">Book My Guide</button>
+
                             </form>
                         </div>
                     </div>
@@ -63,26 +60,17 @@ $locality=$_POST['uid_val'];
             </div>
             <!-- #END# Vertical Layout -->
     </div>
-    
+
  <script>
-      // Note: This example requires that you consent to location sharing when
-      // prompted by your browser. If you see the error "The Geolocation service
-      // failed.", it means you probably did not give permission for the browser to
-      // locate you.
       var map, infoWindow;
       function initMap() {
-        
-       // infoWindow = new google.maps.InfoWindow;
-
-        // Try HTML5 geolocation.
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-          
-            //alert(position.coords.latitude);
+
             document.getElementById("lat1").value=position.coords.latitude;
             document.getElementById("lat2").value=position.coords.longitude;
             infoWindow.setPosition(pos);
@@ -106,31 +94,24 @@ $locality=$_POST['uid_val'];
         infoWindow.open(map);
       }
 
-  //    alert("Hi");
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbZeKLxUIX3Bsp3jQsQjH-qfD3rLM_nvE&callback=initMap">
     </script>
 
 <?php
-alert($uid);
-   /**
-*INSERT POST CODE
-**/
+//alert($user_name);
 if(isset($_POST['book_guide']))
 {
     $guide_d=$_POST['user_loc'];
-    
-
-    /**
-    *INSERT CODE ADDED BY RIZWAN ON 24/06/2017
-    **/
-    $stmt = $mysqli->prepare("INSERT INTO courses(ccode,cname,ctype,mmarks,credits,dept,semester,cclass,status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param('sssssssss', $p_ccode, $p_cname, $p_ctype, $p_mmarks, $p_credits, $p_dept, $p_semester, $p_cclass, $p_status);
+    $nowt=date("Y-m-d h:i:s");
+    $cs=0;
+    $stmt = $mysqli->prepare("INSERT INTO booking(tourist,guide,book_time,confirmed) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param('ssss', $user_name, $guide_d, $nowt, $cs);
     if($stmt->execute())
-        alert_sweet_success("Course Added Successfully!!!");
+        alert_sweet_success("Booking Success!!!");
     else
-        alert_sweet_failed("Unable to Add Course!!! Try Again!!!");
+        alert_sweet_failed("Unable to Book!!! Try Again!!!");
     $stmt->close();
     $_REQUEST = $_POST = $_GET = NULL;
 }

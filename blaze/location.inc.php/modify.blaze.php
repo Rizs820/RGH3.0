@@ -111,7 +111,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Locality</th>
-                                        <th>Distance Radius</th>
+                                        <th>Distance</th>
                                         <th>Guides</th>
                                         <th>Ratings</th>
                                         <th>Booking</th>
@@ -121,7 +121,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Locality</th>
-                                        <th>Distance Radius</th>
+                                        <th>Distance</th>
                                         <th>Guides</th>
                                         <th>Ratings</th>
                                         <th>Booking</th>
@@ -129,7 +129,7 @@
                                 </tfoot>
                                 <tbody>
                                     <?php 
-                                        $qt="SELECT id,name,rating,locality, ( 6371 * acos( cos( radians(".$lat.") ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(".$lng.") ) + sin( radians(".$lat.") ) * sin( radians( lat ) ) ) ) AS distance  FROM pois HAVING distance < 25 ORDER BY distance";
+                                        $qt="SELECT id,name,rating,locality, ( 6371 * acos( cos( radians(".$lat.") ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(".$lng.") ) + sin( radians(".$lat.") ) * sin( radians( lat ) ) ) ) AS distance  FROM pois HAVING distance < 2500 ORDER BY distance";
                                         $query = mysqli_query($mysqli,$qt) or die(mysqli_error($mysqli));
                                         
                                             while ($row=mysqli_fetch_array($query))
@@ -144,7 +144,7 @@
                                                 echo '<td>'.round($row['distance'],2).'</td>';
                                                 echo '<td>'.$guidec.'</td>';
                                                 echo '<td>'.$row['rating'].'</td>';
-                                                echo '<td><form method="POST" action="./act=location/book"><input type="hidden" id="request_opr'.$uid.'" value="Book_Guide"><input type="hidden" id="request_id'.$uid.'" name="request_id" value="'.UUID::v4().'"><input type="hidden" id="uid_val'.$row['locality'].'" name="uid_val" value="'.$row['locality'].'"><button type="submit" class="btn bg-light-green waves-effect" id="Book_Action" name="Book_Action" value="'.$row['locality'].'"><i class="material-icons ">BOOK NOW</i></button></form></td>';
+                                                echo '<td><form method="POST" action="./?act=location/book"><input type="hidden" id="request_opr'.$uid.'" value="Book_Guide"><input type="hidden" id="request_id'.$uid.'" name="request_id" value="'.UUID::v4().'"><input type="hidden" id="uid_val'.$row['locality'].'" name="uid_val" value="'.$row['locality'].'"><button type="submit" class="btn bg-light-green waves-effect" id="Book_Action" name="Book_Action" value="'.$row['locality'].'"><i class="material-icons ">BOOK NOW</i></button></form></td>';
                                                 echo '</tr>';
             
                                             }

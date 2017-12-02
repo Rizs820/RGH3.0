@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
 *PARAMETERS FETCH FOR FORM
 **/
@@ -9,7 +9,7 @@ $m_mode="RESET PASSWORD (RP)";
     <div class="container-fluid">
             <div class="block-header">
                 <h2>USER MANAGER (UM) / <?php echo $m_mode;?></h2>
-            </div>    
+            </div>
             <!-- Vertical Layout -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -68,31 +68,21 @@ $m_mode="RESET PASSWORD (RP)";
             </div>
             <!-- #END# Vertical Layout -->
     </div>
-    
+
 <?php
-/********************************************************************************************
-                    FORM POST CHANGE PASSWORD
-********************************************************************************************/
-/*if(isset($_POST['change_password']))
-{*/
-//alert($_POST['user_id']);
 if (isset($_POST['cp_pn'], $_POST['user_id'])) {
     $npassword = $_POST['cp_pn']; // The hashed password.
     $uemail = $_POST['user_id'];
     if (reset_password($uemail,$npassword, $mysqli) == true) {
-        // Change success 
+        // Change success
         alert_sweet_success("User Password Updated Successfully!!! User Can Login with New Password!!!");
         //header("Location: ?act=login&pchange=1");
     } else {
-        // Change failed 
+        // Change failed
         alert_sweet_failed("Unable to Update Password, Please Contact Administrator!!!");
     }
 } else {
-    // The correct POST variables were not sent to this page. 
+    // The correct POST variables were not sent to this page.
     //alert_sweet_failed("Something went wrong, Contact Support!!!");
 }
-//}
-/********************************************************************************************
-                    END OF CHANGE PASSWORD
-********************************************************************************************/
 ?>

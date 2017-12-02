@@ -30,7 +30,7 @@
     <script src="plugins/flot-charts/jquery.flot.categories.js"></script>
     <script src="plugins/flot-charts/jquery.flot.time.js"></script>
 
-    
+
     <!-- Sparkline Chart Plugin Js -->
     <script src="plugins/jquery-sparkline/jquery.sparkline.js"></script>
 
@@ -100,7 +100,7 @@
         data: { request_opr: $("#request_opr"+id).val(), request_id: $("#request_id"+id).val(), uid_val: $("#uid_val"+id).val() },
         success:function(result) {
            // alert(JSON.stringify(result));
-            
+
         if(result.redirect==1)
         {
             //alert(result.message);
@@ -108,7 +108,7 @@
         }
         else
         {
-            swal("Error!!!", "Error Occured, Try Again or Contact Admin!!!", "error");    
+            swal("Error!!!", "Error Occured, Try Again or Contact Admin!!!", "error");
         }
         },
         error:function(result) {
@@ -144,15 +144,15 @@
         dataType: 'json',
         data: { request_opr: $("#drequest_opr"+id).val(), request_id: $("#drequest_id"+id).val(), uid_val: $("#duid_val"+id).val() },
         success:function(result) {
-        if(result.result==1)    
+        if(result.result==1)
         {
-            //swal("Deleted!!!",result.message,"success");   
+            //swal("Deleted!!!",result.message,"success");
             swal({title: "Deleted!!!", text: result.message, type: "success"},
-            function(){ 
+            function(){
             //location.reload();
             window.location.href = window.location.href.replace(/#.*$/, '');
             }
-            ); 
+            );
         }
         else
         {
@@ -162,9 +162,9 @@
         error:function(result) {
           swal("Error!!!", "Error Occured, Try Again or Contact Admin!!!", "error");
         }
-        });  
+        });
 
-        } 
+        }
         else {
             swal("Cancelled", "Your data is safe :)", "error");
         }
@@ -172,7 +172,6 @@
 
     });
 
-    //-----------Cancel Action Added By Rizwan----------------
     $("#Cancel_Action, #123").on("click", function(e) {
     e.preventDefault();
     id = $(this).val();
@@ -180,7 +179,7 @@
     uid_valv = $("#cuid_val"+id).val();
     request_oprv = $("#crequest_opr"+id).val();
     request_idv = $("#crequest_id"+id).val();
-    //alert(uid_valv + request_oprv + request_idv);
+
     swal({
         title: "Are you sure ?",
         text: "You will not be able to recover this action!",
@@ -198,15 +197,15 @@
         dataType: 'json',
         data: { request_opr: $("#crequest_opr"+id).val(), request_id: $("#crequest_id"+id).val(), uid_val: $("#cuid_val"+id).val() },
         success:function(result) {
-        if(result.result==1)    
+        if(result.result==1)
         {
-            //swal("Deleted!!!",result.message,"success");   
+            //swal("Deleted!!!",result.message,"success");
             swal({title: "Form Cancelled/Restored!!!", text: result.message, type: "success"},
-            function(){ 
+            function(){
             //location.reload();
             window.location.href = window.location.href.replace(/#.*$/, '');
             }
-            ); 
+            );
         }
         else
         {
@@ -216,9 +215,9 @@
         error:function(result) {
           swal("Error!!!", "Error Occured, Try Again or Contact Admin!!!", "error");
         }
-        });  
+        });
 
-        } 
+        }
         else {
             swal("Action Cancelled", "Your data is safe :)", "error");
         }
@@ -227,7 +226,6 @@
     });
 
 
-    //-----------Reject Action Added By Rizwan----------------
     $("#Reject_Action, #123").on("click", function(e) {
     e.preventDefault();
     id = $(this).val();
@@ -254,15 +252,15 @@
         dataType: 'json',
         data: { request_opr: $("#rrequest_opr"+id).val(), request_id: $("#rrequest_id"+id).val(), uid_val: $("#ruid_val"+id).val(), rreason: inputValue },
         success:function(result) {
-        if(result.result==1)    
+        if(result.result==1)
         {
-            //swal("Deleted!!!",result.message,"success");   
+            //swal("Deleted!!!",result.message,"success");
             swal({title: "Form Rejected/Restored!!!", text: result.message, type: "success"},
-            function(){ 
+            function(){
             //location.reload();
             window.location.href = window.location.href.replace(/#.*$/, '');
             }
-            ); 
+            );
         }
         else
         {
@@ -276,48 +274,6 @@
         //swal("Nice!", "You wrote: " + inputValue, "success");
     });
 
-    /*swal({
-        title: "Are you sure ?",
-        text: "You will not be able to recover this action!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, do it!",
-        cancelButtonText: "No, cancel plz!",
-        closeOnConfirm: false,
-        closeOnCancel: false
-    }, function (isConfirm) {
-        if (isConfirm) {
-          $.ajax({type: "POST",
-        url: "blaze/action.blaze.php",
-        dataType: 'json',
-        data: { request_opr: $("#rrequest_opr"+id).val(), request_id: $("#rrequest_id"+id).val(), uid_val: $("#ruid_val"+id).val() },
-        success:function(result) {
-        if(result.result==1)    
-        {
-            //swal("Deleted!!!",result.message,"success");   
-            swal({title: "Form Rejected/Restored!!!", text: result.message, type: "success"},
-            function(){ 
-            //location.reload();
-            window.location.href = window.location.href.replace(/#.*$/, '');
-            }
-            ); 
-        }
-        else
-        {
-            swal("Failed!!!",result.message, "error");
-        }
-        },
-        error:function(result) {
-          swal("Error!!!", "Error Occured, Try Again or Contact Admin!!!", "error");
-        }
-        });  
-
-        } 
-        else {
-            swal("Action Cancelled", "Your data is safe :)", "error");
-        }
-    });*/
 
     });
 
@@ -325,7 +281,7 @@
 
     $(function () {
 
-   
+
     //TinyMCE
     tinymce.init({
         selector: "textarea#tinymce",
@@ -344,5 +300,5 @@
     tinymce.suffix = ".min";
     tinyMCE.baseURL = 'plugins/tinymce';
 });
- 
+
     </script>

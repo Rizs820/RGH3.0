@@ -4,7 +4,7 @@ include_once 'includes/functions.php';
 include_once 'includes/fetch.php';
 
 
-//session_start();            // Start the PHP session 
+//session_start();            // Start the PHP session
 date_default_timezone_set('Asia/Kolkata');
 if(!isset($_COOKIE['rm0301stat'])) {
     $rm_theme_color="theme-black";
@@ -23,7 +23,7 @@ $my_page=$_GET["act"];
 $path=explode("/", $my_page);
 $act_path="";
 $i=1;
-foreach ($path as $s_path) 
+foreach ($path as $s_path)
 {
     if($i==count($path))
     {
@@ -35,22 +35,14 @@ foreach ($path as $s_path)
     }
     $i++;
 }
-//alert($user_group);
-
-
-/**
-*IF LOGGED IN THEN CANNOT VIEW LOGIN PAGE
-**/
 if($my_page=="login")
     if (login_check($mysqli) == true)
         header("Location: ?act=home");
-/**
-*IF PASSWORF CHANGED VIEW MESSAGE ON LOGIN PAGE
-**/
+
 if($my_page!="login")
     if (login_check($mysqli) == false)
         if($_SESSION['passchange']==md5("1"))
-        { 
+        {
             $_SESSION['passchange']="";
             header("Location: ?act=login&pchange=1");
         }
@@ -59,13 +51,8 @@ if($my_page!="login")
 else
     if (((login_check($mysqli) == true)&&($my_page==""))||((login_check($mysqli) == true)&&($my_page=="login")))
         header("Location: ?act=home");
-        /*if($my_page=="")
-            header("Location: ?act=home");*/    
-/**
-*PREVENT REDIRECT ATTACK USING DIE
-**/    
 if($my_page!="login")
-    if (login_check($mysqli) == false) 
+    if (login_check($mysqli) == false)
         die("Something Went Wrong. Please contact Admin @ +91 9922592979");
 if($err=="") $err=NULL;
 if($stat=="") $stat=NULL;
@@ -75,9 +62,6 @@ if($access_token)
     alert_wr("Account Activated, You may proceed to Login!!!","?act=login");
 }
 
-/**
-*USER ACCESS CHECK ADDED BY RIZWAN ON 15/08/2017
-**/
 if($my_page!="login"&&$user_group!=1&&$my_page!="home")
 {
     //alert($uid);
@@ -85,9 +69,7 @@ if($my_page!="login"&&$user_group!=1&&$my_page!="home")
     if(!(user_access($mysqli,$uid,$my_page)==1||group_access($mysqli,$user_group,$my_page)==1))
             alert_wr("Invalid Access!!! Contact Admin to Get Access!!!","./");
 }
-/**
-*Die for Attack
-**/
+
 if($my_page!="login"&&$user_group!=1&&$my_page!="home")
 {
     //alert($uid);
@@ -112,7 +94,7 @@ else
     }*/
     if($my_page=="common/reports/generate")
     {
-        include("blaze/reports.inc.php/generate.blaze.php");   
+        include("blaze/reports.inc.php/generate.blaze.php");
     }
     else
     {
