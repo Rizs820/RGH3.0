@@ -49,6 +49,12 @@
                             <span>View/Cancel Bookings</span>
                         </a>
                     </li>
+                     <li <?php echo in_array("bookingg", $path) ? 'class="active"' : ""; ?>>
+                        <a href="./?act=bookingg/modify">
+                            <i class="material-icons">home</i>
+                            <span>View Bookings (For Guide)</span>
+                        </a>
+                    </li>
                    
                     
                     

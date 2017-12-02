@@ -43,6 +43,7 @@
                                         <th>Locality</th>
                                         <th>Guides</th>
                                         <th>Ratings</th>
+                                        <th>Charges</th>
                                         <th>Booking</th>
                 
                                     </tr>
@@ -53,6 +54,7 @@
                                         <th>Locality</th>
                                         <th>Guides</th>
                                         <th>Ratings</th>
+                                        <th>Charges</th>
                                         <th>Booking</th>
                                     </tr>
                                 </tfoot>
@@ -69,6 +71,7 @@
                                                 echo '<td>'.$locality.'</td>';
                                                 echo '<td>'.$guidec.'</td>';
                                                 echo '<td>'.$row['rating'].'</td>';
+                                                echo '<td>'.$row['prices'].'</td>';
                                                  echo '<td><form method="POST" action="./?act=location/book"><input type="hidden" id="request_opr'.$uid.'" value="Book_Guide"><input type="hidden" id="request_id'.$uid.'" name="request_id" value="'.UUID::v4().'"><input type="hidden" id="uid_val'.$row['locality'].'" name="uid_val" value="'.$row['locality'].'"><button type="submit" class="btn bg-light-green waves-effect" id="Book_Action" name="Book_Action" value="'.$row['locality'].'"><i class="material-icons ">BOOK NOW</i></button></form></td>';
                                                 echo '</tr>';
             
