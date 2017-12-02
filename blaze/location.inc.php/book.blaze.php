@@ -105,7 +105,7 @@ if(isset($_POST['book_guide']))
 {
     $guide_d=$_POST['user_loc'];
     $nowt=date("Y-m-d h:i:s");
-    $cs=0;
+    $cs="Yes";
     $stmt = $mysqli->prepare("INSERT INTO booking(tourist,guide,book_time,confirmed) VALUES (?, ?, ?, ?)");
     $stmt->bind_param('ssss', $user_name, $guide_d, $nowt, $cs);
     if($stmt->execute())

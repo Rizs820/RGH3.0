@@ -36,7 +36,7 @@ $myRequestArray=$_SESSION[$user_request];
                                 <label for="user_loc">Select Locality</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <select id="user_loc" name="user_loc" class="form-control show-tick" data-live-search="true" required>
+                                        <select id="user_loc" name="user_loc" class="form-control show-tick" data-live-search="true">
                                         <option value="">Please Select Locality</option>
                                         <?php
                                             $query=mysqli_query($mysqli,"SELECT name FROM locality") or die(mysqli_error($mysqli));

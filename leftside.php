@@ -40,7 +40,13 @@
                      <li <?php echo in_array("location", $path) ? 'class="active"' : ""; ?>>
                         <a href="./?act=location/add">
                             <i class="material-icons">home</i>
-                            <span>Find POIs</span>
+                            <span>Find & Book POIs</span>
+                        </a>
+                    </li>
+                     <li <?php echo in_array("booking", $path) ? 'class="active"' : ""; ?>>
+                        <a href="./?act=booking/modify">
+                            <i class="material-icons">home</i>
+                            <span>View/Cancel Bookings</span>
                         </a>
                     </li>
                    
