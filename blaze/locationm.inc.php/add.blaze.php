@@ -54,7 +54,8 @@ $myRequestArray=$_SESSION[$user_request];
                                 </div>
                                <input type="hidden"  name="lat1" id="lat1">
                                  <input type="hidden"  name="lat2" id="lat2">
-                                <button type="submit" name="add_user" value="add_user" class="btn btn-block btn-lg btn-primary m-t-20 waves-effect">Get POIs</button>
+                                <button type="submit" name="submit" value="By Locality" class="btn btn-block btn-lg btn-primary m-t-20 waves-effect" value="By Locality">Get POIs By Locality </button>
+                                 <button type="submit" name="submit" value="add_user" class="btn btn-block btn-lg btn-primary m-t-20 waves-effect">Get POIs Near Me</button>
                                
                             </form>
                         </div>
