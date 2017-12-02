@@ -6,7 +6,6 @@ include_once 'includes/fetch.php';
 
 //session_start();            // Start the PHP session 
 date_default_timezone_set('Asia/Kolkata');
-
 if(!isset($_COOKIE['rm0301stat'])) {
     $rm_theme_color="theme-black";
     $rm_theme="black";
@@ -38,10 +37,6 @@ foreach ($path as $s_path)
 }
 //alert($user_group);
 
-
-/**
-*LOGIN CHECK
-**/
 
 /**
 *IF LOGGED IN THEN CANNOT VIEW LOGIN PAGE
@@ -111,18 +106,18 @@ else
     {
         $act_path="blaze/".$act_path;
     }
-    else
+    /*else
     {
         header("Location: ./?act=home");
-    }
-    /*if($my_page=="common/reports/generate")
+    }*/
+    if($my_page=="common/reports/generate")
     {
         include("blaze/reports.inc.php/generate.blaze.php");   
     }
     else
     {
         include("home.inc.php");
-    }*/
+    }
 }
 if($my_page=="login"&&$errorc==1)
     alert("Invalid Username/Password or Account not Activated");

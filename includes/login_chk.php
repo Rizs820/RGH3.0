@@ -14,7 +14,7 @@ if (isset($_POST['log_email'], $_POST['log_p'])) {
     echo "<br>".$npass;*/
     $username=explode("@", $email);
     if(count($username)==1)
-        $email=$email."@rajasthan.gov.in";
+        $email=$email."@gcoej.ac.in";
     if (login($email, $password, $mysqli) == true) {
         // Login success 
         mysqli_query($mysqli,"UPDATE members SET last_login=NOW() WHERE email='$email'") or die(mysqli_error());

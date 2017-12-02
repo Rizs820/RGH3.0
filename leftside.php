@@ -6,8 +6,8 @@
                     <img src="images/user.png" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo "Rizwan R Syed";//$user_name;?></div>
-                    <div class="email"><?php echo "rizs820@gmail.com";//$email;?></div>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $user_name;?></div>
+                    <div class="email"><?php echo $email;?></div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
@@ -37,6 +37,19 @@
                             <span>Home</span>
                         </a>
                     </li>
+                     <li <?php echo in_array("location", $path) ? 'class="active"' : ""; ?>>
+                        <a href="./?act=location/add">
+                            <i class="material-icons">home</i>
+                            <span>Find POIs by Locality</span>
+                        </a>
+                    </li>
+                    <li <?php echo in_array("location", $path) ? 'class="active"' : ""; ?>>
+                        <a href="./?act=locationm/add">
+                            <i class="material-icons">home</i>
+                            <span>Find POIs near Me</span>
+                        </a>
+                    </li>
+                    
                     
                 </ul>
             </div>

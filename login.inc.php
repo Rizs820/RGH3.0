@@ -7,7 +7,7 @@
 <body class="login-page">
     <div class="login-box">
         <div class="logo">
-            <a href="javascript:void(0);"><b>RAGA</b> - RGH</a>
+            <a href="javascript:void(0);"><b>RAGA</b> - Raj. Govt.</a>
             <small>Rajasthan Area Guide Application By Rizwan Syed</small>
         </div>
         <div class="card">
@@ -56,7 +56,9 @@
             </div>
         </div>
     </div>
-
+<?php
+    //include("jquery.php");
+?>
 </body>
 
 </html>

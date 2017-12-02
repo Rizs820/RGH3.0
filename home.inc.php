@@ -1,7 +1,3 @@
-<?php
-    //App Fragmentation... 
-?>
-
 <!DOCTYPE html>
 <html>
 <?php

@@ -1,4 +1,3 @@
 <?php
-include_once 'psl-config.php';
-$mysqli = new mysqli(HOST,USER,PASSWORD,DATABASE) or die("Sorry Unable to Connect to the Database");
-?>
+include_once 'psl-config.php';   // As functions.php is not included
+$mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE) or die("Unable to Connect..");
